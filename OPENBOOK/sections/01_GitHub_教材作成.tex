@@ -1,0 +1,63 @@
+\section{GitHubでの教材作成 (Markdown \& Jupyter Notebook)}
+
+\subsection{リポジトリの作成}
+まず、教材を管理するためのGitHubリポジトリを作成します。
+リポジトリは、教材の種類や対象読者に応じて、適切な名前を付けます。
+例えば、「量子化学教科書」や「高校物理教材」などが考えられます。
+リポジトリの公開範囲は、教材の利用対象に応じて選択します。
+オープンな教材を目指す場合は「Public」、特定のグループ内での利用を想定する場合は「Private」を選択します。
+
+\subsection{ファイル構成}
+リポジトリ内は、教材の内容に応じて適切なファイル構成にします。
+Markdownファイル、Jupyter Notebookファイル、図などを整理し、可読性の高い構成を心がけます。
+MkDocsでは、`docs`ディレクトリ以下に教材ファイルを配置します。
+一般的には、以下のような構成が考えられます。
+
+\begin{itemize}
+    \item \texttt{docs/index.md}:  ホームページ
+    \item \texttt{docs/00\_Introduction.md}:  導入
+    \item \texttt{docs/01\_GitHub\_教材作成.md}:  このファイル
+    \item \texttt{docs/exercises/}:  演習問題 (ipynb, md)
+    \item \texttt{docs/examples/}:  例題 (ipynb)
+    \item \texttt{docs/figures/}:  図
+\end{itemize}
+
+\subsection{執筆}
+MarkdownとJupyter Notebookを用いて教材の内容を記述します。
+
+\begin{itemize}
+    \item \textbf{Markdownファイル}:  テキストコンテンツ、数式、リンク、画像などを記述します。MkDocsはMarkdownファイルをHTMLに変換してウェブサイトを生成します。
+    \item \textbf{Jupyter Notebookファイル}:  Pythonコードの実行例、インタラクティブなシミュレーション、演習問題などを記述します。MkDocsはJupyter NotebookファイルをHTMLに変換してウェブサイトに組み込むことができます。
+\end{itemize}
+
+数式は MathJax (KaTeX)  で記述できます。
+
+\texttt{```markdown}
+$$
+E = mc^2
+$$
+\texttt{```}
+
+コードブロックは以下のように記述します。
+
+\texttt{```python}
+print("Hello, world!")
+\texttt{```}
+
+\subsection{バージョン管理}
+git commit, push コマンドを用いて、定期的に変更をリポジトリに反映します。
+コミットメッセージには、変更内容を簡潔に記述します。
+ブランチ機能を活用することで、機能追加や修正を安全に行うことができます。
+
+\subsection{MkDocsでのプレビュー}
+MkDocsのローカルサーバーを起動して、記述した教材をプレビューできます。
+
+\texttt{```bash}
+mkdocs serve
+\texttt{```}
+
+ブラウザで http://localhost:8000 を開くと、教材がプレビューできます。
+
+\subsection{GitHub Pagesでの公開}
+MkDocs build コマンドで生成したHTMLファイルをGitHub Pagesにデプロイすることで、教材をウェブサイトとして公開できます。
+詳しい手順は、別のセクションで解説します。

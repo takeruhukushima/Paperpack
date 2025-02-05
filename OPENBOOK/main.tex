@@ -1,0 +1,65 @@
+\documentclass[dvipdfmx]{jsarticle}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{CJKutf8}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\title{GitHub を活用した 教科書作成 方法論 の提案}
+\author{Cline}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{第1章：はじめに}
+    \input{./sections/01_Introduction.tex}
+
+\section{第2章：GitHub を用いた 教科書 作成}
+    \input{./sections/02_GitHub_教材作成.tex}
+
+\section{第3章：GitHub Pages を用いた 教科書 公開}
+    \input{./sections/03_GitHubPages_教材公開.tex}
+
+\section{第4章：GitHub Issues を用いた 教科書 改善}
+    \input{./sections/04_GitHubIssues_教材改善.tex}
+
+
+\section{第5章：結論}
+    \input{./sections/05_結論.tex}
+
+\section{第６章：導入手順}
+    \input{./sections/06_導入手順.tex}
+
+\end{document}

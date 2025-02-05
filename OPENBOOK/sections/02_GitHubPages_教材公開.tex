@@ -1,0 +1,21 @@
+\section{GitHub Pagesでの教材公開}
+
+\subsection{GitHub Pagesとは}
+GitHub Pagesは、GitHubリポジトリでホストされている静的Webサイトを公開できるサービスです。
+教材リポジトリをGitHub Pagesとして公開することで、誰でもWebブラウザから教材を閲覧できるようになります。
+
+\subsection{公開設定}
+GitHub Pagesの設定は、リポジトリのSettings > Pages から行います。
+Source ブランチとして main ブランチ (または gh-pages ブランチ) を選択し、/(root) ディレクトリを指定します。
+これにより、リポジトリのルートディレクトリにある index.html (または Markdownファイルなど) がWebサイトのトップページとして公開されます。
+
+\subsection{教材のWebサイト化}
+\LaTeX{}で記述された教材をWebサイトとして公開するためには、\LaTeX{}ファイルをHTML形式に変換する必要があります。
+いくつかの方法がありますが、代表的なものとして \texttt{mkdocs} を用いる方法があります。
+\texttt{mkdocs} は、Markdown形式で記述されたドキュメントをHTMLに変換し、Webサイトとして公開するためのツールです。
+\LaTeX{}ファイルをMarkdown形式に変換し、\texttt{mkdocs} でHTML化することで、GitHub Pagesで公開可能なWebサイトを生成できます。
+
+\subsection{公開URL}
+GitHub Pagesで公開されたWebサイトは、以下のURLでアクセスできます。
+\texttt{https://<ユーザ名>.github.io/<リポジトリ名>/}
+または、カスタムドメインを設定することも可能です。

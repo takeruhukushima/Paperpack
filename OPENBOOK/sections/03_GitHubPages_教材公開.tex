@@ -1,0 +1,75 @@
+
+前章では、GitHub を基盤とした教材作成について解説しました。
+本章では、GitHub の \textbf{提供する} 静的 \textbf{ウェブサイトホスティング} サービスである GitHub Pages を活用し、作成した教材をウェブ上に公開する方法について解説します。
+
+\subsection{GitHub Pages とは：教材公開の \textbf{最適な} 選択肢}
+
+GitHub Pages は、GitHub \textbf{リポジトリ} 内の ファイル (HTML, CSS, JavaScript, 画像 など) を静的ウェブサイトとして公開できるサービスです。
+\textbf{教科書} や \textbf{講義資料} など、静的 \textbf{コンテンツ} で構成される教材の公開に最適です。
+
+\subsection{GitHub Pages の \textbf{利点}：教材公開を \textbf{容易に}}
+
+GitHub Pages を教材公開に利用するメリットは、主に以下の点が挙げられます。
+
+\begin{itemize}
+    \item \textbf{簡単公開}:  \textbf{リポジトリ} に教材ファイルを push するだけで、ウェブサイトを公開できます。
+    \item \textbf{無料ホスティング}: GitHub Pages は無償で利用できるため、費用を抑えて \textbf{ウェブサイト} を運用できます。
+    \item \textbf{カスタムドメイン}: カスタムドメインを設定することで、ウェブサイトのアドレスを独自のものにできます。
+    \item \textbf{HTTPS 対応}: HTTPS に標準で対応しており、ウェブサイトのセキュリティを確保できます。
+    \item \textbf{バージョン管理との連携}: GitHub \textbf{リポジトリ} と連携しているため、教材の更新に合わせて \textbf{ウェブサイト} も自動的に更新されます。
+\end{itemize}
+
+\subsection{GitHub Pages の タイプ：プロジェクトページとユーザーページ}
+
+GitHub Pages には、主に以下の2つのタイプがあります。
+
+\begin{itemize}
+    \item \textbf{プロジェクトページ}:  \textbf{リポジトリ} ごとに公開されるウェブサイトです。
+        - 主に、ソフトウェアプロジェクトのドキュメンテーションやデモサイトなどに利用されます。
+        - ウェブサイトの URL は、\texttt{https://<ユーザ名>.github.io/<リポジトリ名>} となります。
+    \item \textbf{ユーザーページ}: ユーザーアカウントごとに公開されるウェブサイトです。
+        - 主に、個人のポートフォリオやブログなどに利用されます。
+        - ウェブサイトの URL は、\texttt{https://<ユーザ名>.github.io} となります。
+        - ユーザーページは、 \textbf{リポジトリ} 名が \texttt{<ユーザ名>.github.io} である \textbf{リポジトリ} の \texttt{main} ブランチから公開されます。
+\end{itemize}
+
+教材公開には、プロジェクトページ、ユーザーページのどちらでも利用できますが、 \textbf{教科書} など複数の教材を公開する場合は、ユーザーページを利用すると便利です。
+
+\subsection{GitHub Pages 公開手順：プロジェクトページの場合}
+
+ここでは、プロジェクトページを例に、GitHub Pages で教材を公開する手順を説明します。
+
+\begin{enumerate}
+    \item \textbf{リポジトリ作成}: 教材を \textbf{保存} する \textbf{リポジトリ} を作成します。
+    \item \textbf{ファイル作成}:  \textbf{リポジトリ} に HTML ファイル や Markdown ファイルなど、ウェブサイトとして公開したいファイルを作成します。
+        - Markdown ファイルは、GitHub Pages によって自動的に HTML に変換されます。
+    \item \textbf{GitHub Pages 有効化}:  \textbf{リポジトリ} の Settings ページから、GitHub Pages を有効化します。
+        - Source ブランチを選択し (\textbf{通常} \texttt{main} ブランチ )、 Save ボタンをクリックします。
+    \item \textbf{ウェブサイト公開}: 数分後、\texttt{https://<ユーザ名>.github.io/<リポジトリ名>} に \textbf{ウェブサイト} が公開されます。
+\end{enumerate}
+
+\subsection{mkdocs を用いた \textbf{教科書} 作成： \textbf{より効率的な} \textbf{教科書} 作成}
+
+\textbf{教科書} のような \textbf{多ページ} な \textbf{ウェブサイト} を作成する場合、mkdocs のような静的サイト \textbf{ジェネレーター} を利用すると便利です。
+mkdocs は、Markdown 形式で \textbf{教科書} の \textbf{コンテンツ} を記述し、 \textbf{美しい} \textbf{ウェブサイト} を \textbf{容易に} 生成できるツールです。
+
+mkdocs を利用した \textbf{教科書} 作成の手順は、以下のようになります。
+
+\begin{enumerate}
+    \item \textbf{mkdocs インストール}: \texttt{pip install mkdocs} コマンドで mkdocs をインストールします。
+    \item \textbf{mkdocs プロジェクト作成}: \texttt{mkdocs create <プロジェクト名>} コマンドで mkdocs プロジェクトを作成します。
+    \item \textbf{設定ファイル修正}: \texttt{mkdocs.yml} ファイルを修正し、 \textbf{教科書} のタイトルやテーマなどを設定します。
+    \item \textbf{コンテンツ記述}: \texttt{docs} ディレクトリ内に Markdown ファイルで \textbf{教科書} の \textbf{コンテンツ} を記述します。
+    \item \textbf{ウェブサイト生成}: \texttt{mkdocs build} コマンドで \textbf{ウェブサイト} を生成します。
+    \item \textbf{リポジトリにデプロイ}: 生成された \textbf{ウェブサイト} ( \texttt{site} ディレクトリ内 ) を \textbf{リポジトリ} に push します。
+    \item \textbf{GitHub Pages 有効化}: 前述の手順で GitHub Pages を有効化します。
+\end{enumerate}
+
+mkdocs を利用することで、 \textbf{教科書} のような構造化された \textbf{ウェブサイト} を \textbf{効率的} に作成し、GitHub Pages で公開することができます。
+
+\subsection{まとめ：GitHub Pages で \textbf{教科書} を世界に公開}
+
+本章では、GitHub Pages を用いた教材公開の方法について解説しました。
+GitHub Pages を活用することで、教材を \textbf{容易に} ウェブ上に公開し、\textbf{アクセシビリティ}を向上させることができます。
+
+次章では、GitHub Issues を用いた教材の改善方法について解説します。
