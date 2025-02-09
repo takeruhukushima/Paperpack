@@ -1,0 +1,463 @@
+\documentclass{ltjsarticle} % 日本語対応の LuaLaTeX クラス
+
+% AMS系数学パッケージ
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{physics} % 微分・積分記法 (\dv, \pdv など) が利用可能
+\usepackage{bm}      % ベクトルや行列の太字表記のため（必要に応じて）
+
+% タイトル、著者、日付の設定
+\title{数学の Lua\LaTeX\ Notation}
+\author{Taro J. Armstrong}
+\date{\today}
+
+% 定理環境の設定（必要に応じて）
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}[theorem]{補題}
+\newtheorem{corollary}[theorem]{系}
+\newtheorem{definition}[theorem]{定義}
+\newtheorem{example}[theorem]{例}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{はじめに}
+この文書は、Lua\LaTeX\ 用に数学記法をまとめたリファレンスです。  
+基本的な記法に加え、極限、集合、論理記号、絶対値・ノルム、内積・外積、微分・積分、行列演算、特殊関数、複素数、測度論、確率・統計、テンソル記法など幅広い記法の例を掲載しています。
+
+\section{基本的な数式}
+\subsection{代数的表記}
+基本的な代数の式として、
+\[
+  a^2 + b^2 = c^2
+\]
+のような表記ができます。
+
+\subsection{総和・総乗記法}
+総和と総乗の例：
+\[
+  \sum_{i=1}^{n} i = \frac{n(n+1)}{2}, \quad \prod_{i=1}^{n} i = 1\cdot2\cdots n.
+\]
+
+\subsection{極限記法}
+極限の例：
+\[
+  \lim_{x\to\infty} \frac{1}{x} = 0, \quad \lim_{n\to\infty} a_n = L.
+\]
+また、上限・下限の極限記法も：
+\[
+  \limsup_{n\to\infty} a_n,\quad \liminf_{n\to\infty} a_n.
+\]
+
+\section{変換・積分変換}
+変換や積分変換の例：
+\[
+  \mathcal{F}\{f(t)\} = \int_{-\infty}^{\infty} f(t)e^{-2\pi i \xi t}\,dt,\quad \mathcal{L}\{f(t)\} = \int_0^\infty e^{-st}f(t)\,dt.
+\]
+
+\section{微分・積分}
+\subsection{微分}
+通常の微分の記法：
+\[
+  \frac{d}{dx}\sin x = \cos x \quad \text{または} \quad \dv{x}{t}.
+\]
+物理記法パッケージによる偏微分の例：
+\[
+  \pdv{f}{x}, \quad \pdv[2]{f}{x}, \quad \pdv{f}{x}{y} \quad (\text{混合偏微分}).
+\]
+また、外微分記号 \(d\) を用いた微分形式の表記も文脈により利用されます。
+
+\subsection{積分}
+積分の基本例：
+\[
+  \int_{0}^{1} x^2\,dx = \frac{1}{3}.
+\]
+
+\subsection{線積分・面積分・体積分}
+線積分の例：
+\[
+  \oint_C \mathbf{F}\cdot d\mathbf{r}.
+\]
+面積分・体積分の例：
+\[
+  \iint_S f(x,y,z)\,dS, \quad \iiint_V f(x,y,z)\,dV.
+\]
+
+\subsection{多重積分}
+二重積分や三重積分の例：
+\[
+  \iint_D f(x,y)\,dx\,dy, \quad \iiint_D f(x,y,z)\,dx\,dy\,dz.
+\]
+
+\subsection{測度論的積分}
+ルベーグ積分など測度論に基づく積分の例：
+\[
+  \int_X f\,d\mu.
+\]
+
+\section{行列・ベクトル}
+\subsection{行列の表記}
+行列の例：
+\[
+  A = \begin{pmatrix}
+    a_{11} & a_{12} \\
+    a_{21} & a_{22}
+  \end{pmatrix}.
+\]
+
+\subsection{行列演算の拡張}
+固有値・固有ベクトルの記法：
+\[
+  Av = \lambda v,\quad \lambda \in \mathbb{C}.
+\]
+行列のトレースと逆行列：
+\[
+  \operatorname{tr}(A), \quad A^{-1}.
+\]
+行列指数関数の例：
+\[
+  \exp(A) = \sum_{n=0}^{\infty} \frac{A^n}{n!}.
+\]
+\medskip
+
+\noindent\textbf{【追加】}  
+転置、行列式、特異値分解の記法：
+\[
+  A^\top,\quad \det(A),\quad A = U\Sigma V^\ast.
+\]
+
+\subsection{ベクトルの表記}
+ベクトルの例：
+\[
+  \vec{v} = \begin{pmatrix} v_1 \\ v_2 \\ v_3 \end{pmatrix}.
+\]
+
+\section{場合分け}
+関数の定義を場合分けする例：
+\[
+  f(x)=
+  \begin{cases}
+    x^2, & \text{if } x \ge 0,\\[1mm]
+    -x^2, & \text{if } x < 0.
+  \end{cases}
+\]
+
+\section{集合と論理記号}
+基本的な集合・論理記号の例：
+\[
+  \mathbb{R},\ \mathbb{Z},\ \mathbb{N},\ \mathbb{C}, \quad \forall\, x \in \mathbb{R}, \quad \exists\, x \in \mathbb{R},
+\]
+\[
+  A \subseteq B,\quad A \cup B,\quad A \cap B.
+\]
+区間や集合の内包記法：
+\[
+  [a,b],\quad \{ x \in \mathbb{R} \mid x > 0 \}.
+\]
+また、位相的な記法も併記できます：
+\[
+  \overline{A} \ (\text{閉包}),\quad \operatorname{int}(A) \ (\text{内部}),\quad \partial A \ (\text{境界}),\quad A \setminus B \ (\text{差集合}).
+\]
+
+\section{絶対値とノルム}
+絶対値やノルムの例：
+\[
+  |x|, \quad \|x\|, \quad \left| \frac{a}{b} \right|.
+\]
+
+\section{内積と外積}
+ベクトルの内積と外積の例：
+\[
+  \langle \mathbf{u}, \mathbf{v} \rangle, \quad \mathbf{u} \times \mathbf{v}.
+\]
+
+\section{特殊関数}
+\subsection{基本的な特殊関数}
+指数関数、対数、三角関数など：
+\[
+  \exp(x),\quad \log x,\quad \sin x,\quad \cos x,\quad \tan x.
+\]
+\subsection{拡張特殊関数}
+応用数学や理論物理で用いられる特殊関数の例：
+\[
+  J_\nu(x) \quad (\text{ベッセル関数}),\quad \Gamma(z) \quad (\text{ガンマ関数}),\quad \zeta(s) \quad (\text{リーマンゼータ関数}).
+\]
+
+\section{複素数の表記}
+複素数集合と複素数の例：
+\[
+  \mathbb{C}, \quad z = a + bi.
+\]
+\subsection{極形式と実部・虚部の記法}
+極形式での表記や実部・虚部の記法：
+\[
+  z = re^{i\theta},\quad \Re(z),\quad \Im(z).
+\]
+
+\section{床関数・天井関数}
+床関数と天井関数の例：
+\[
+  \lfloor x \rfloor, \quad \lceil x \rceil.
+\]
+
+\section{写像記号}
+写像記号の例：
+\[
+  f: A \to B.
+\]
+
+\section{論理演算子}
+論理演算子の例：
+\[
+  \land,\quad \lor,\quad \Rightarrow,\quad \Leftrightarrow.
+\]
+
+\section{漸近記法}
+漸近記法の例：
+\[
+  O(n), \quad o(n).
+\]
+
+\section{合同式・モジュラー算術}
+合同式の例：
+\[
+  a \equiv b \pmod{n}.
+\]
+
+\section{確率・統計}
+確率論・統計学に関する記法の例：
+\[
+  P(A), \quad \mathbb{E}[X], \quad \operatorname{Var}(X), \quad \operatorname{Cov}(X,Y).
+\]
+確率分布の例：
+\[
+  X \sim \mathcal{N}(\mu, \sigma^2).
+\]
+\subsection{拡張確率記法}
+条件付き確率や指示関数の記法：
+\[
+  P(A \mid B),\quad \mathbf{1}_A(x).
+\]
+
+\section{その他の記号と演算子}
+\subsection{アインシュタインの縮約記法}
+添字を省略して和を表すアインシュタイン縮約記法の例：
+\[
+  a_i b^i \quad (\text{添字の反復は和を意味します}).
+\]
+
+\subsection{ベクトル解析}
+微分演算子としての発散と回転の例：
+\[
+  \operatorname{div} \, \mathbf{F} = \nabla \cdot \mathbf{F}, \quad \operatorname{curl} \, \mathbf{F} = \nabla \times \mathbf{F}.
+\]
+\paragraph{【追加】} 勾配やラプラシアンの記法：
+\[
+  \nabla f,\quad \Delta f = \nabla\cdot\nabla f.
+\]
+
+\section{テンソル記法}
+テンソル解析で用いられる記法の例：
+\[
+  \delta_{ij} \quad (\text{Kronecker のデルタ}),\quad \varepsilon_{ijk} \quad (\text{Levi-Civita 記号}).
+\]
+
+\section{定理と証明}
+\begin{theorem}[ピタゴラスの定理]
+直角三角形において、斜辺の長さ \(c\) と他の2辺 \(a\), \(b\) は以下の関係を満たす:
+\[
+  a^2+b^2=c^2.
+\]
+\end{theorem}
+
+\begin{proof}
+直角三角形の性質に基づき各辺の平方和が成立することを示す。詳細な証明は省略する。
+\end{proof}
+
+\section{多行整列環境}
+複数行に渡る数式の整列例：
+\begin{align}
+  a + b &= c, \\
+  d - e &= f.
+\end{align}
+
+% =============================
+% 以下、既存の拡張セクション
+% =============================
+
+\section{抽象代数学と圏論}
+圏 \(\mathcal{C}\) では、対象 \(X, Y, Z, \dots\) と射 \(f: X \to Y\) が定義され、関手 \(F: \mathcal{C} \to \mathcal{D}\) や自然変換 \(\eta: F \Rightarrow G\) の記法が用いられます。
+
+\section{位相空間と関数解析}
+\subsection{位相空間の記法}
+位相空間 \( (X, \tau) \) において、開集合 \( U \in \tau \)、閉包 \( \overline{A} \)、内部 \( \operatorname{int}(A) \)、境界 \( \partial A \) などの記法が利用されます。
+
+\subsection{関数解析の記法}
+Banach空間やHilbert空間 \( H \) を用い、\( L^p \) 空間のノルム記法 \( \| f \|_{L^p} \) や弱収束 \( \rightharpoonup \)、強収束 \( \to \) の記法が使われます。
+
+\section{複素解析の拡張}
+\subsection{Laurent級数と留数}
+複素関数 \( f(z) \) は点 \( z_0 \) の周りでLaurent展開可能であり、
+\[
+  f(z) = \sum_{n=-\infty}^{\infty} a_n (z - z_0)^n.
+\]
+また、留数は
+\[
+  \operatorname{Res}(f, z_0) = a_{-1}
+\]
+で表されます。
+
+\section{微分幾何学とテンソル解析の拡張}
+\subsection{微分形式と楔積}
+微分形式 \( \omega \) に対し、外微分 \( d\omega \) や楔積 \( \omega \wedge \eta \) の記法が利用されます。
+
+\subsection{接続と曲率}
+接続 \( \nabla \) やChristoffel記号 \( \Gamma_{ij}^k \)、リーマン曲率テンソル \( R^l_{ijk} \) など、微分幾何学で重要な記法が含まれます。
+
+\section{確率・統計の追加記法}
+\subsection{確率分布}
+離散分布や連続分布の例として、
+\[
+  X \sim \operatorname{Poisson}(\lambda), \quad Y \sim \operatorname{Beta}(\alpha,\beta)
+\]
+などの記法が用いられます。
+
+\subsection{統計的推定・検定}
+統計的解析において、p値 \( p \)、信頼区間 \( \mathrm{CI} \)、検定統計量 \( t \) や \( \chi^2 \) の記法が利用されます。
+
+\section{グラフ理論}
+グラフ \( G=(V,E) \) に対して、頂点集合 \( V \) と辺集合 \( E \) の記法および隣接行列
+\[
+  A = (a_{ij})
+\]
+の記法が用いられます。
+
+\section{漸近記法の拡充}
+アルゴリズム解析等で用いられる記法として、Θ記法やΩ記法：
+\[
+  f(n) = \Theta(g(n)), \quad f(n) = \Omega(g(n))
+\]
+が挙げられます。
+
+\section{集合論の拡充}
+冪集合や順序数、基数の記法：
+\[
+  \mathcal{P}(A) \quad (\text{冪集合}), \quad |A| \quad (\text{基数}),
+\]
+また、順序数の例として \( \omega, \omega_1 \) などが利用されます。
+
+% =============================
+% 以下、新たに追加するセクション
+% =============================
+
+\section{組合せ論・離散数学の記法}
+\subsection{二項係数と階乗}
+二項係数は以下のように表されます:
+\[
+  \binom{n}{k} = \frac{n!}{k!(n-k)!}.
+\]
+また、階乗は \( n! \) と表記され、離散数学における重要な概念です。
+
+\subsection{漸化式}
+例えば、フィボナッチ数列は次の漸化式で定義されます:
+\[
+  F_n = F_{n-1} + F_{n-2}, \quad F_0 = 0,\quad F_1 = 1.
+\]
+
+\section{高階微分の記法}
+関数 \( f(x) \) の \( n \) 階微分は \( f^{(n)}(x) \) と表記されます。例として、2階微分は:
+\[
+  f''(x) = \frac{d^2f}{dx^2}.
+\]
+
+\section{抽象代数学と圏論の補足記法}
+\subsection{射の集合と自己同型群}
+圏 \(\mathcal{C}\) における射の集合は \(\operatorname{Hom}_{\mathcal{C}}(X,Y)\) と表されます。  
+また、対象 \( X \) の自己同型群は
+\[
+  \operatorname{Aut}(X) = \{ f \in \operatorname{Hom}_{\mathcal{C}}(X,X) \mid f \text{ は同型} \}
+\]
+と定義されます。
+
+\subsection{核と余核}
+線型写像 \( T: V \to W \) に対し、核は
+\[
+  \ker T = \{ v \in V \mid T(v) = 0 \},
+\]
+余核は
+\[
+  \operatorname{coker}\, T = W / \operatorname{im}\, T.
+\]
+
+\section{測度論と関数解析の補足記法}
+\subsection{エッセンシャルサプレム}
+実関数 \( f \) に対して、エッセンシャルサプレムは
+\[
+  \operatorname{ess\,sup} f = \inf \{ M \ge 0 \mid \mu(\{x \mid |f(x)| > M\}) = 0 \}.
+\]
+
+\subsection{\(\sigma\)-加法族}
+集合 \( X \) 上の \(\sigma\)-加法族は、集合族 \(\mathcal{F}\) が以下の性質を満たすときに定義されます:
+\begin{enumerate}
+  \item \( X \in \mathcal{F} \).
+  \item \( A \in \mathcal{F} \Rightarrow A^c \in \mathcal{F} \).
+  \item \( A_n \in \mathcal{F}\ (n \in \mathbb{N}) \Rightarrow \bigcup_{n=1}^{\infty} A_n \in \mathcal{F} \).
+\end{enumerate}
+
+\section{数論の記法}
+\subsection{Legendre記号}
+素数 \( p \) に対して、Legendre記号は
+\[
+  \left(\frac{a}{p}\right) = \begin{cases}
+    0 & \text{if } p \mid a, \\
+    1 & \text{if } a \text{ は二次剰余}, \\
+    -1 & \text{otherwise},
+  \end{cases}
+\]
+と定義されます。
+
+\subsection{ヤコビ記号}
+合成数 \( n \) に対して、ヤコビ記号 \(\left(\frac{a}{n}\right)\) も同様の方法で定義されます。
+
+\section{最適化・応用数学の記法}
+\subsection{ラグランジアンとハミルトニアン}
+最適化問題では、制約付き最適化のためにラグランジアン \(\mathcal{L}(x, \lambda)\) を導入し、
+\[
+  \mathcal{L}(x, \lambda) = f(x) - \lambda g(x),
+\]
+と定義します。  
+物理学では、ハミルトニアン \( H(x,p,t) \) がエネルギー関数として用いられます。
+
+\subsection{ヘッセ行列}
+関数 \( f: \mathbb{R}^n \to \mathbb{R} \) の2階微分係数からなるヘッセ行列は
+\[
+  \nabla^2 f(x) = \begin{pmatrix}
+    \frac{\partial^2 f}{\partial x_1^2} & \cdots & \frac{\partial^2 f}{\partial x_1 \partial x_n} \\
+    \vdots & \ddots & \vdots \\
+    \frac{\partial^2 f}{\partial x_n \partial x_1} & \cdots & \frac{\partial^2 f}{\partial x_n^2}
+  \end{pmatrix}.
+\]
+
+\section{まとめ}
+このテンプレートは、基本的な数学記法に加え、抽象代数学、位相・関数解析、複素解析、微分幾何、確率・統計、グラフ理論、漸近記法、集合論、そして組合せ論・離散数学、高階微分、数論、最適化・応用数学の記法など、幅広い分野の記法を含んでいます。  
+用途に合わせて、さらに記法を追加・拡張することが可能です。
+
+\section{筆者後書き}
+ChatGPTに作らせました。以下の文言が出るまで「足りない表記法はないか」と掘り下げて作ったものです。
+
+全体的に非常に広範な記法が網羅され、ほぼ多くの分野に対応できる内容となっております。しかしながら、用途や分野に応じた拡張として、以下の点を検討する余地があると考えられます。
+
+1. **圏論・代数幾何の補完**  
+
+2. **双対空間と随伴作用**  
+
+3. **微分方程式および分布論**  
+
+4. **確率論・測度論の厳密な表現**  
+
+5. **組合せ論・離散数学のさらなる記法**  
+
+6. **その他の高度な記法**  
+
+\end{document}

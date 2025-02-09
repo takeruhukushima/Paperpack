@@ -1,0 +1,306 @@
+%----------------------------------------------------------------
+% ドキュメントクラスと基本設定
+%----------------------------------------------------------------
+\documentclass[a4paper,12pt]{ltjsarticle} % LuaLaTeX 用 ltjsarticle クラス
+
+%----------------------------------------------------------------
+% パッケージの読み込み
+%----------------------------------------------------------------
+% 数式関連
+\usepackage{amsmath,amssymb,amsthm}
+
+% 画像や図の挿入
+\usepackage{graphicx}
+\usepackage{tikz} % 図形描画用
+
+% 表組み
+\usepackage{booktabs} % 美しい罫線
+
+% ハイパーリンク
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue
+}
+
+% 色の利用
+\usepackage{xcolor}
+
+% コードリスティング
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  captionpos=b
+}
+
+% 単位の記述
+\usepackage{siunitx}
+
+% 図・表キャプションの調整
+\usepackage{caption}
+\usepackage{subcaption}
+
+% リストの書式調整
+\usepackage{enumitem}
+
+% ページレイアウト調整
+\usepackage[margin=25mm]{geometry}
+
+% ヘッダー・フッター
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{論文タイトル}
+\fancyhead[R]{\today}
+\fancyfoot[C]{\thepage}
+
+% 参考文献管理（biblatex の利用例）
+\usepackage[backend=biber,style=authoryear]{biblatex}
+\addbibresource{references.bib} % 参考文献ファイル（例: references.bib）
+
+%----------------------------------------------------------------
+% 執筆関連のパッケージ追加
+%----------------------------------------------------------------
+% 記号一覧の生成（Notation）
+\usepackage{nomencl}
+\makenomenclature
+
+% 略語管理
+\usepackage{acronym}
+
+% 編集用マークアップ（注釈・コメント）
+\usepackage[colorinlistoftodos]{todonotes}
+
+%----------------------------------------------------------------
+% 定理環境・独自コマンドの定義
+%----------------------------------------------------------------
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}[theorem]{補題}
+\newtheorem{proposition}[theorem]{命題}
+
+\theoremstyle{definition}
+\newtheorem{definition}{定義}[section]
+\newtheorem{example}{例}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{注意}
+
+% 論文執筆関連の追加環境：仮説
+\newtheorem{hypothesis}{仮説}[section]
+
+% 数集合やその他の記号マクロの定義
+\newcommand{\R}{\mathbb{R}} % 実数全体
+\newcommand{\N}{\mathbb{N}} % 自然数全体
+\newcommand{\Z}{\mathbb{Z}} % 整数全体
+\newcommand{\Q}{\mathbb{Q}} % 有理数全体
+\newcommand{\C}{\mathbb{C}} % 複素数全体
+
+% 演算子の統一定義
+\DeclareMathOperator{\argmax}{arg\,max}
+\DeclareMathOperator{\argmin}{arg\,min}
+\DeclareMathOperator{\tr}{tr}
+
+% 統計・最適化関連の記法
+\newcommand{\E}{\mathbb{E}}   % 期待値
+\newcommand{\Var}{\operatorname{Var}} % 分散
+\newcommand{\Prob}{\mathbb{P}} % 確率
+
+% 内積・ノルムなどの記法
+\newcommand{\ip}[2]{\langle #1,\,#2 \rangle} % 内積
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert} % ノルム
+
+% 微分・積分記号の調整
+\newcommand{\dif}{\mathop{}\!\mathrm{d}}
+
+%----------------------------------------------------------------
+% 本文開始
+%----------------------------------------------------------------
+\begin{document}
+
+% タイトル、著者、日付
+\title{包括的な論文執筆用\LaTeX テンプレート}
+\author{著者名}
+\date{\today}
+\maketitle
+
+% 抄録
+\begin{abstract}
+本稿は、LuaLaTeX を用いた一般的な論文作成のための記法を網羅的に示すテンプレートである。
+以下、各種環境・パッケージの使用例とともに、数式や図表、リスト、定理、参考文献の挿入方法、並びに記号一覧や略語管理の仕組みを解説する。
+\todo{抄録の内容の見直しが必要な場合はここにコメントを記入}
+\end{abstract}
+
+% 目次
+\tableofcontents
+\newpage
+
+% 記号一覧（Notation セクション）
+\section*{記号一覧}
+\printnomenclature
+\newpage
+
+% 略語一覧
+\section*{略語一覧}
+\begin{acronym}[HTML]
+  \acro{PDF}{Portable Document Format}
+  \acro{HTML}{HyperText Markup Language}
+  % 他の略語を必要に応じて追加
+\end{acronym}
+\newpage
+
+%----------------------------------------------------------------
+% 1. はじめに
+%----------------------------------------------------------------
+\section{はじめに}
+本テンプレートは、論文執筆に必要な記法や環境を包括的に取り扱うものである。
+各セクションでは、具体例を交えながら実際の利用シーンを想定して説明する。
+\todo{導入部に具体的な研究背景を記述する}
+
+%----------------------------------------------------------------
+% 2. 数式の記述例
+%----------------------------------------------------------------
+\section{数式の記述例}
+本文中での数式（例：$E=mc^2$）と独立した数式環境の利用例を示す。
+
+% 連立方程式の例
+\begin{align}
+a + b &= c, \\
+x^2 + y^2 &= r^2.
+\end{align}
+
+% 分岐関数の例
+関数の定義例:
+\[
+f(x) =
+\begin{cases}
+x^2, & x \ge 0, \\
+-x,  & x < 0.
+\end{cases}
+\]
+
+% 行列の例
+行列の記法:
+\[
+A = \begin{pmatrix}
+1 & 2 \\
+3 & 4
+\end{pmatrix}.
+\]
+
+%----------------------------------------------------------------
+% 3. 定理・証明環境の利用例
+%----------------------------------------------------------------
+\section{定理・証明環境の利用例}
+以下に、定理環境および新たに追加した仮説環境の使用例を示す。
+
+\begin{theorem}[ピタゴラスの定理]
+直角三角形において、斜辺の長さは他の2辺の長さの二乗和の平方根に等しい。
+\end{theorem}
+
+\begin{proof}
+詳細な証明は省略するが、古典的なユークリッド幾何学の性質から導かれる。
+\end{proof}
+
+\begin{definition}[収束]
+数列 $\{a_n\}$ が極限 $L$ に収束するとは、任意の $\epsilon > 0$ に対して
+\[
+\exists N \in \N \quad \text{such that} \quad n \ge N \Rightarrow |a_n - L| < \epsilon
+\]
+が成立することである。
+\end{definition}
+
+% 仮説環境の利用例
+\begin{hypothesis}[例]
+本研究では、変数 $X$ と $Y$ の間に正の相関関係が存在すると仮定する。
+\end{hypothesis}
+
+%----------------------------------------------------------------
+% 4. 図・表の利用例
+%----------------------------------------------------------------
+\section{図・表の利用例}
+
+% 図の挿入例
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.6\textwidth]{example-image} % graphicx パッケージのダミー画像利用例
+  \caption{サンプル画像}
+  \label{fig:sample}
+\end{figure}
+
+% 表の挿入例
+\begin{table}[htbp]
+  \centering
+  \caption{データ表の例}
+  \label{tab:sample}
+  \begin{tabular}{ccc}
+    \toprule
+    列1 & 列2 & 列3 \\
+    \midrule
+    1   & 2   & 3   \\
+    4   & 5   & 6   \\
+    7   & 8   & 9   \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+%----------------------------------------------------------------
+% 5. リスト・コード挿入例
+%----------------------------------------------------------------
+\section{リスト・コード挿入例}
+
+% 箇条書きの例
+箇条書きの例:
+\begin{itemize}
+  \item 第一項目
+  \item 第二項目
+  \item 第三項目
+\end{itemize}
+
+% 番号付きリストの例
+番号付きリストの例:
+\begin{enumerate}[label=(\arabic*)]
+  \item 最初の項目
+  \item 次の項目
+  \item 最後の項目
+\end{enumerate}
+
+% コードリスティングの例
+以下は LaTeX のサンプルコードの挿入例である。
+\begin{lstlisting}[language=TeX, caption={LaTeX のサンプルコード}, label={lst:sample}]
+\documentclass{article}
+\begin{document}
+Hello, World!
+\end{document}
+\end{lstlisting}
+
+%----------------------------------------------------------------
+% 6. 参考文献の利用例
+%----------------------------------------------------------------
+\section{参考文献の利用例}
+文中で文献を引用する場合、\cite{sampleReference} のように記述する。
+以下に参考文献リストを出力する例を示す。
+
+\printbibliography
+
+%----------------------------------------------------------------
+% 付録
+%----------------------------------------------------------------
+\appendix
+\section{付録: 追加資料}
+ここには、本文中で説明しきれなかった補足資料や詳細な計算過程を記載する。
+
+% 略語環境の使い方例（オプション）
+\section{略語環境の使い方例}
+\begin{acronym}[HTML]
+  \acro{API}{Application Programming Interface}
+  \acro{SaaS}{Software as a Service}
+\end{acronym}
+
+%----------------------------------------------------------------
+% 本文終了
+%----------------------------------------------------------------
+\end{document}

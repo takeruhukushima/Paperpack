@@ -1,0 +1,75 @@
+\documentclass{ltjsarticle}
+\usepackage{amsmath,amssymb}  % 数式環境の拡張
+\usepackage{physics}          % 微分や積分の記法の簡略化
+\usepackage{siunitx}          % 単位の表記
+
+\title{物理学で用いる\TeX 記法のまとめ}
+\author{Taro J. Armstrong}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{はじめに}
+本書は、物理学の分野で頻繁に使用される数式や記号の表現方法について解説するものである。基本的な数学記法から、量子力学や電磁気学の代表例まで、実践的な記法を取り上げる。なお、必要に応じて追加のパッケージを導入することで、表現の幅を広げる工夫も可能である。
+
+\section{基本的な数式記法}
+\subsection{微分と積分}
+微分の基本形は、以下のように表現できる。
+\[
+\dv{y}{x} = \frac{\dd y}{\dd x}
+\]
+また、積分の表記は次のとおりである。
+\[
+\int_a^b f(x)\,\dd x
+\]
+このような記法は、physics パッケージを利用することで、より直感的に記述できる点が利点である。
+
+\subsection{総和と級数}
+無限級数の和は、以下の例で示されるように記述する。
+\[
+\sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6}
+\]
+
+\subsection{行列とベクトル}
+行列の記法は、次のような環境で表す。
+\[
+A = \begin{pmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{pmatrix}
+\]
+また、ベクトルは以下のように記述できる。
+\[
+\vec{v} = \begin{pmatrix} v_x \\ v_y \\ v_z \end{pmatrix}
+\]
+
+\section{物理学固有の記法}
+\subsection{シュレディンガー方程式}
+量子力学の基礎方程式であるシュレディンガー方程式は、以下のように表される。
+\[
+i\hbar \frac{\partial}{\partial t} \Psi(\mathbf{r},t) = -\frac{\hbar^2}{2m}\nabla^2 \Psi(\mathbf{r},t) + V(\mathbf{r}) \Psi(\mathbf{r},t)
+\]
+
+\subsection{マクスウェルの方程式}
+電磁気学においては、ガウスの法則などが基本となる。たとえば、電場の発散は次のように記述できる。
+\[
+\nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0}
+\]
+
+\section{単位の表記}
+\texttt{siunitx} パッケージを活用することで、単位の表記に一貫性を持たせることができる。例として、重力加速度は以下のように示す。
+\[
+\SI{9.81}{\meter\per\second\squared}
+\]
+
+\section{結び}
+以上の例は、物理学分野における\TeX 記法の一端を示すにすぎない。必要に応じてさらなる記法やパッケージを導入することで、実際の論文やレポートに適した記述方法を確立することが望まれる。たとえば、より複雑な数式環境や特定分野向けのカスタム記号の定義など、今後の発展が期待される分野である。
+
+\section{筆者後書き}
+とりあえず作っては見ましたが、数学のnotationだけで十分だったので、物理の公式をまとめるのに使おうと思います。頻繁に更新するかも。
+
+\section{更新}
+\begin{itemize}
+    \item 2025-02-09：first commit
+  \end{itemize}
+
+\end{document}
